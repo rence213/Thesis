@@ -1,0 +1,16 @@
+* larger social media icons inside circle
+* links on the pinaka left na column
+* paliitin ung footer ng onti lng
+* bold who we are what is Thriftr and more questions?
+* default state of footer is "show"
+
+-added a default email on 
+"TO" and disabled it
+
+-added icon to tab
+
+
+things to add by anyone of us
+-hover animation over buttonws
+-better click animation on buttons
+(kasi wala tayong animation or anyclues for a click)
