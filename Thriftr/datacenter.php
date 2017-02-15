@@ -1,7 +1,19 @@
 <?php
 	require_once('support/support.php');
-	addComponent('head');
-	addComponent('navbar2');
+	
+	
+
+	if(isset($_SESSION[APPNAME]['UserId'])){
+		addComponent('head');
+		addComponent('navbar2');
+
+		$trafficCount = $connection -> myQuery('SELECT COUNT(id) as traffic FROM trafficwarehouse.stg3_traffic_table;')->fetch(PDO::FETCH_ASSOC);
+		$weatherCount = $connection -> myQuery('SELECT COUNT(mean) as weather FROM trafficwarehouse.stg_weather;')->fetch(PDO::FETCH_ASSOC);
+		$accCount = $connection -> myQuery('SELECT COUNT(female) as acc FROM trafficwarehouse.stg_road_acc;')->fetch(PDO::FETCH_ASSOC);
+		$eveCount = $connection -> myQuery('SELECT COUNT(mall_name) as eve FROM trafficwarehouse.event;')->fetch(PDO::FETCH_ASSOC);
+	}else{
+		redirect('index.php');
+	}
 	
 ?>
 
@@ -91,7 +103,7 @@
 				<div class="small-box bg-aqua">
 		            <div class="inner">
 		              <h3>Accidents</h3>
-		              <p>32,420 Records</p>
+		              <p><?php echo number_format($accCount['acc']); ?> Records</p>
 		            </div>
 		            <div class="icon">
 		              <i class="fa fa-warning"></i>
@@ -105,7 +117,7 @@
 				<div class="small-box bg-aqua">
 		            <div class="inner">
 		              <h3>Mall Sales</h3>
-		              <p>32,420 Records</p>
+		              <p><?php echo number_format($eveCount['eve']); ?> Records</p>
 		            </div>
 		            <div class="icon">
 		              <i class="fa  fa-building-o"></i>
@@ -134,7 +146,7 @@
 				<div class="small-box bg-aqua">
 		            <div class="inner">
 		              <h3>Traffic</h3>
-		              <p>32,420 Records</p>
+		              <p><?php echo number_format($trafficCount['traffic']); ?> Records</p>
 		            </div>
 		            <div class="icon">
 		              <i class="fa fa-car"></i>
@@ -148,7 +160,7 @@
 				<div class="small-box bg-aqua">
 		            <div class="inner">
 		              <h3>Weather</h3>
-		              <p>32,420 Records</p>
+		              <p><?php echo number_format($weatherCount['weather']); ?> Records</p>
 		            </div>
 		            <div class="icon">
 		              <i class="fa  fa-cloud"></i>

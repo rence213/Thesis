@@ -7,12 +7,14 @@
 <!-- FastClick -->
 <script src="plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
+
 <script src="dist/AdminLTE/js/app.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,drawing&amp;sensor=false&amp;key=AIzaSyB1hBlgm-B5aaLB2470dyJVGyC-nx_UnQg"></script>
 <script src="js/myjs/map.js"></script>
 <script src="js/myjs/modals.js"></script>
 <script src="js/gmaps.js"></script>
 <script type="text/javascript" src="plugins/waves/dist/waves.min.js"></script>
+
 <script type="text/javascript">
 
 
@@ -27,6 +29,8 @@ Waves.attach('.wave-button', ['flat-buttons', 'waves-effect', 'waves-light']); /
 	Waves.attach('.wave-button2', [ 'waves-effect', 'waves-button']); //flat button
 	Waves.attach('.wave-circle', ['waves-effect', 'waves-circle', 'waves-float']);
     Waves.init();
+
+
 
 </script>
 

@@ -20,8 +20,8 @@
 	<div class="navbar-custom-menu">
 		<ul class="nav navbar-nav">
 		
-		<li><a class="wave-button" role="button" style="font-size:15px;">Hi, Steven Jobs</a></li>
-		<li><a class="wave-button" role="button" style="font-size:15px;">Log Out</a></li>
+		<li><a class="wave-button" role="button" style="font-size:15px;">Hi, <?php echo $_SESSION[APPNAME]['FullName'];?></a></li>
+		<li><a class="wave-button" role="button" style="font-size:15px;" href="php/LoggingOut.php">Log Out</a></li>
 		</ul>
 
 		
