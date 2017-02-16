@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="dist/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
   <link rel="stylesheet" href="dist/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/AdminLTE/css/AdminLTE.min.css">
   <link rel="stylesheet" href="dist/AdminLTE\css\skins\_all-skins.css">

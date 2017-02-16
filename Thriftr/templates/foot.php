@@ -14,7 +14,7 @@
 <script src="js/myjs/modals.js"></script>
 <script src="js/gmaps.js"></script>
 <script type="text/javascript" src="plugins/waves/dist/waves.min.js"></script>
-
+<script type="text/javascript" src="plugins/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript">
 
 
@@ -31,6 +31,7 @@ Waves.attach('.wave-button', ['flat-buttons', 'waves-effect', 'waves-light']); /
     Waves.init();
 
 
+$('.datepicker').datepicker();
 
 </script>
 
