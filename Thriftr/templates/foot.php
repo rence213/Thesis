@@ -15,6 +15,7 @@
 <script src="js/gmaps.js"></script>
 <script type="text/javascript" src="plugins/waves/dist/waves.min.js"></script>
 <script type="text/javascript" src="plugins/datepicker/bootstrap-datepicker.js"></script>
+ <script src="plugins/iCheck/icheck.js"></script>
 <script type="text/javascript">
 
 
@@ -33,6 +34,19 @@ Waves.attach('.wave-button', ['flat-buttons', 'waves-effect', 'waves-light']); /
 
 $('.datepicker').datepicker();
 
+// $(document).ready(function(){
+//   $('.icheck').iCheck({
+//     checkboxClass: 'icheckbox_square-blue',
+//     radioClass: 'iradio_square-blue ',
+//     increaseArea: '10%' // optional
+//   });
+// });
+
+
+    /**
+     * Listen for the Class Click on the buttons created.
+    **/
+    
 </script>
 
 </body>

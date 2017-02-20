@@ -59,8 +59,9 @@
 				<button class="btn btn-flat bg-green"><i class="glyphicon glyphicon-download-alt"></i> Download Excel</button>
 		</div>
 			<div class=" form-group col-lg-3">
-				<input type="checkbox" id="enable" onclick="enable_cb(this);"> Select Fields</input>
-				<button class="btn btn-flat " id="select_field" disabled><i class="glyphicon glyphicon-search"></i> Fields</button>
+				<input type="checkbox"  id="enable" onclick="enable_cb(this);"> Select Fields</input>
+				
+				<button class="btn btn-flat " id="select_field"  disabled><i class="glyphicon glyphicon-search"></i> Fields</button>
 				
 		</div>
 			
@@ -158,19 +159,36 @@
 	</div>
 	
 </div>
-<script type="text/javascript">
-function enable_cb(cb) {
-  if (cb.checked) {
-    $("#select_field").removeAttr("disabled");
-    	$("#select_field").addClass("bg-green");
-  } else {
-    $("#select_field").attr("disabled", true);
-    $("#select_field").removeClass("bg-green");
-  }
-}
-</script>
+
 
 <?php
 	addComponent('foot');
 ?>
 
+<script type="text/javascript">
+function enable_cb(cb) {
+  if (cb.checked) {
+    $("#select_field").removeAttr("disabled");
+    	$("#select_field").addClass("bg-blue");
+  } else {
+    $("#select_field").attr("disabled", true);
+    $("#select_field").removeClass("bg-blue");
+  }
+}
+
+
+var    options = { 
+       trigger: 'click',
+       html: 'true',
+       title:  "<b>Select Fields to include</b>",
+       content: "<button>asdasa</button>"
+       };
+
+    /**
+     *  Create the Popover with above Options
+    **/
+    $('#select_field').popover(options);
+
+
+
+</script>

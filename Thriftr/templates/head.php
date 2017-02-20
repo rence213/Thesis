@@ -16,7 +16,9 @@
   <link rel="stylesheet" href="dist/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="dist/AdminLTE/css/AdminLTE.min.css">
   <link rel="stylesheet" href="dist/AdminLTE\css\skins\_all-skins.css">
-   <link rel="stylesheet" type="text/css" href="plugins/waves/dist/waves.min.css" />
+  <link rel="stylesheet" type="text/css" href="plugins/waves/dist/waves.min.css" />
+  <link href="plugins/iCheck/square/blue.css" rel="stylesheet"/>
+ 
 
   
   
