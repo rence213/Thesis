@@ -7,33 +7,63 @@
 		addComponent('head');
 		addComponent('navbar2');
 	}else{
-		addComponent('head');
-		addComponent('navbar2');
+		redirect('index.php');
 	}
+	
+
 	
 ?>
 
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="">
 	<div class="row">
-		<div style="position:absolute;top:15rem; color:white; background-color: rgba(0, 0, 0, 0.7); width:30%; ">
-			<h1 class="pull-right" style="margin-right: 40px"><strong>Download Data</strong></h1>
+		<div style="position:absolute;top:15rem; color:white; background-color: rgba(0, 0, 0, 0.7); width:40rem; ">
+			<h1 class="pull-right" style="margin-right: 5rem"><strong>Download Data</strong></h1>
 		</div>
 	</div>
-	
 	<br>
-
-	<div class="row"  style="top:15rem; margin-top: 25rem">
-	<span style="margin-left:5rem;">
+	<div class="row" style="top:15rem; margin-top: 22rem">
+		<span class="col-lg-4">
 			<ul>
-					<li>Download From the Source Systems</li>
-					<li>Choose range of data source</li>
-					<li>(Optional) Specify Specific fields or columns</li>
+						<li>Download From the Source Systems</li>
+						<li>Choose range of data source</li>
+						<li>(Optional) Specify Specific fields or columns</li>
 			</ul>
 			<br>
-			<h4 style="margin-left:5rem;">DataSource Selected: <b>Weather data</b></h4>
-	</span><br><br>
+			<h4 style="margin-left:5rem;">DataSource Selected: <b><?php echo $_GET['type'];?> data</b></h4>
+			<br>
+		</span>
+		<span class="col-lg-7">
+			<div class="box box-default">
+            <div class="box-header with-border" style="background-color:#001F3F; color:white;">
+              <i class="fa fa-info"></i>
+              <h3 class="box-title">Overview</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body row" style="padding:2rem;padding-top:1rem;">
+            	<span class="col-lg-6">
+            	<center><b style="font-size:1.75rem;">Data Info</b><br></center><br>
+            	Dataset name: <br>
+            	Number of Records: <br>
+            	Source: <br>
+            	</span>
+            	<span class="col-lg-6">
+            	<center><b style="font-size:1.75rem;">Technical</b><br></center><br>
+            	Table Name: <br>
+            	Number Of Columns: <br>
+            	 <br>
+            	</span>
+            </div>
+            <!-- /.box-body -->
+          </div>
+		</span>
+
+	</div>
+<br><br>
+
+	<div class="row">
+		<form id="subform">
 		 <div class="form-group col-lg-3">
 		 	<label>From Date:</label>
 				<div class="input-group date " data-provide="datepicker">
@@ -54,110 +84,44 @@
 				</div>
 		</div>
 
-		<div class=" form-group col-lg-3">
-				<button class="btn btn-flat bg-green"><i class="glyphicon glyphicon-search"></i> Preview</button>
-				<button class="btn btn-flat bg-green"><i class="glyphicon glyphicon-download-alt"></i> Download Excel</button>
-		</div>
-			<div class=" form-group col-lg-3">
+		<div class=" form-group col-lg-6">
+				<button type="submit"  class="btn btn-flat bg-green" onclick="preview()"><i class="glyphicon glyphicon-search"></i> Preview</button>
+				<button type="button" class="btn btn-flat bg-green"><i class="glyphicon glyphicon-download-alt"></i> Download Excel</button>
 				<input type="checkbox"  id="enable" onclick="enable_cb(this);"> Select Fields</input>
-				
-				<button class="btn btn-flat " id="select_field"  disabled><i class="glyphicon glyphicon-search"></i> Fields</button>
+				<button type="button" class="btn btn-flat " id="select_field"  disabled><i class="glyphicon glyphicon-th"></i> Fields</button>
 				
 		</div>
-			
+		
+		</form>	
 	</div>
-
-	<div class="row">
-			<div class="col-lg-12">
-				<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+  		<center>Click <b>Preview</b>  to preview data</center>
+	<div class="row box" style="margin-left:.25rem;">
+	<div class="box-header with-border">
+              <h3 class="box-title"><?php echo $_GET['type'];?> data</h3>
+            </div>
+			<div  style=" overflow:scroll">
+				<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" style="">
                 <thead>
-                <tr role="row">
-	                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 181px;">
-	                Rendering engine
-	                </th>
-	                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 224px;">
-	                Browser
-	                </th>
-	                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 197px;">
-	                Platform(s)
-	                </th>
-	                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 154px;">
-	                Engine version
-	                </th>
-	                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 112px;">
-	                CSS grade
-	                </th>
-
+                <tr role="row" id="tablehead">
+	                
                 </tr>
                 </thead>
                 <tbody>
                 <tr role="row" class="odd">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Firefox 1.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Firefox 2.0</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Firefox 3.0</td>
-                  <td>Win 2k+ / OSX.3+</td>
-                  <td>1.9</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Camino 1.0</td>
-                  <td>OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Camino 1.5</td>
-                  <td>OSX.3+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Netscape 7.2</td>
-                  <td>Win 95+ / Mac OS 8.6-9.2</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Netscape Browser 8</td>
-                  <td>Win 98SE+</td>
-                  <td>1.7</td>
-                  <td>A</td>
-                </tr><tr role="row" class="odd">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Netscape Navigator 9</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                </tr><tr role="row" class="even">
-                  <td class="sorting_1">Gecko</td>
-                  <td>Mozilla 1.0</td>
-                  <td>Win 95+ / OSX.1+</td>
-                  <td>1</td>
-                  <td>A</td>
-                </tr></tbody>
+                </tr>
+                </tbody>
                 <tfoot>
                 </tfoot>
               </table>
 			</div>
 	</div>
-	
+	<!-- <tr role="row" class="even">
+                  <td class="sorting_1">Gecko</td>
+                  <td>Firefox 1.5</td>
+                  <td>Win 98+ / OSX.2+</td>
+                  <td>1.8</td>
+                  <td>A</td>
+                </tr> -->
 </div>
 
 
@@ -166,28 +130,70 @@
 ?>
 
 <script type="text/javascript">
-function enable_cb(cb) {
-  if (cb.checked) {
-    $("#select_field").removeAttr("disabled");
-    	$("#select_field").addClass("bg-blue");
-  } else {
-    $("#select_field").attr("disabled", true);
-    $("#select_field").removeClass("bg-blue");
-  }
-}
 
+	var fields = [];
 
-var    options = { 
+ $.get('php/getTableInfo.php',{request : "tablerows", table:$_GET['type']},function(data){
+	var options = { 
        trigger: 'click',
        html: 'true',
        title:  "<b>Select Fields to include</b>",
-       content: "<button>asdasa</button>"
-       };
+       content: ""+data.html
 
-    /**
-     *  Create the Popover with above Options
-    **/
+   };
     $('#select_field').popover(options);
+	document.getElementById("tablehead").innerHTML = data.tablehead;
+	},'json').fail(function(data){
+    	console.log(data);
+  });
+
+
+	function enable_cb(cb) {
+	  if (cb.checked) {
+	    $("#select_field").removeAttr("disabled");
+	    	$("#select_field").addClass("bg-blue");
+	  } else {
+	    $("#select_field").attr("disabled", true);
+	    $("#select_field").removeClass("bg-blue");
+	  }
+	}
+
+
+
+	 $("#select_field").on('hide.bs.popover', function(){
+
+		$("input:checkbox[name=fieldset]:checked").each(function(){
+    		fields.push($(this).val());
+		});
+		console.log(fields);
+    });
+
+
+	 $("#select_field").on('show.bs.popover', function(){
+		fields = [];
+		console.log(fields);
+    });
+	function preview(){
+		$("input:checkbox[name=fieldset]:checked").each(function(){
+    		fields.push($(this).val());
+		});
+
+
+		$.get("php/getTableInfo.php",{request:'row', table:$_GET['type']}, function(response){
+
+		},'json').fail(function(response){
+			console.log(response)
+		});
+
+
+
+	}
+
+	$('#subform').submit(function () {
+	 return false;
+	});
+
+   
 
 
 

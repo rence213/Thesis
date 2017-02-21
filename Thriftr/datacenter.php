@@ -7,10 +7,11 @@
 		addComponent('head');
 		addComponent('navbar2');
 
-		$trafficCount = $connection -> myQuery('SELECT COUNT(id) as traffic FROM trafficwarehouse.stg3_traffic_table;')->fetch(PDO::FETCH_ASSOC);
-		$weatherCount = $connection -> myQuery('SELECT COUNT(mean) as weather FROM trafficwarehouse.stg_weather;')->fetch(PDO::FETCH_ASSOC);
-		$accCount = $connection -> myQuery('SELECT COUNT(female) as acc FROM trafficwarehouse.stg_road_acc;')->fetch(PDO::FETCH_ASSOC);
-		$eveCount = $connection -> myQuery('SELECT COUNT(mall_name) as eve FROM trafficwarehouse.event;')->fetch(PDO::FETCH_ASSOC);
+		//ajax this part//
+		$trafficCount = $connection -> myQuery('SELECT COUNT(id) as traffic FROM stg3_traffic_table;')->fetch(PDO::FETCH_ASSOC);
+		$weatherCount = $connection -> myQuery('SELECT COUNT(mean) as weather FROM stg_weather;')->fetch(PDO::FETCH_ASSOC);
+		$accCount = $connection -> myQuery('SELECT COUNT(*) as acc FROM stg_road_acc;')->fetch(PDO::FETCH_ASSOC);
+		$eveCount = $connection -> myQuery('SELECT COUNT(mall_name) as eve FROM event;')->fetch(PDO::FETCH_ASSOC);
 	}else{
 		redirect('index.php');
 	}
@@ -108,7 +109,7 @@
 		            <div class="icon">
 		              <i class="fa fa-warning"></i>
 		            </div>
-		            <a href="#" class="small-box-footer">Download <i class="fa fa-download"></i></a>
+		            <a href="downloaddata.php?type=Accident" class="small-box-footer">Download <i class="fa fa-download"></i></a>
 		          </div>		
 				
 				</span>
@@ -122,7 +123,7 @@
 		            <div class="icon">
 		              <i class="fa  fa-building-o"></i>
 		            </div>
-		            <a href="#" class="small-box-footer">Download <i class="fa fa-download"></i></a>
+		            <a href="downloaddata.php?type=Mall" class="small-box-footer">Download <i class="fa fa-download"></i></a>
 		          </div>		
 				
 				</span>
@@ -151,7 +152,7 @@
 		            <div class="icon">
 		              <i class="fa fa-car"></i>
 		            </div>
-		            <a href="#" class="small-box-footer">Download <i class="fa fa-download"></i></a>
+		            <a href="downloaddata.php?type=Traffic" class="small-box-footer">Download <i class="fa fa-download"></i></a>
 		          </div>		
 				
 				</span>
@@ -165,7 +166,7 @@
 		            <div class="icon">
 		              <i class="fa  fa-cloud"></i>
 		            </div>
-		            <a href="#" class="small-box-footer">Download <i class="fa fa-download"></i></a>
+		            <a href="downloaddata.php?type=Weather" class="small-box-footer">Download <i class="fa fa-download"></i></a>
 		          </div>		
 				
 				</span>
