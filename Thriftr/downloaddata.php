@@ -88,13 +88,18 @@
 
 		<div class=" form-group col-lg-6">
 				<button type="submit" id='prev' class="btn btn-flat bg-green"><i class="glyphicon glyphicon-search"></i> Preview</button>
-				<button type="button" class="btn btn-flat bg-green"><i class="glyphicon glyphicon-download-alt"></i> Download Excel</button>
+				
 				<input type="checkbox"  id="enable" onclick="enable_cb(this);"> Select Fields</input>
 				<button type="button" class="btn btn-flat " id="select_field"  disabled><i class="glyphicon glyphicon-th"></i> Fields</button>
 				
 		</div>
 		
 		</form>	
+		<form action="php/printExcel.php" method="POST">
+				<input type="hidden" name="query" id="query" value="0"></input>
+				<input type="hidden" name="data" value="<?php echo $_GET['type'];?>"></input>
+				<button type="submit" class="btn btn-flat bg-green"><i class="glyphicon glyphicon-download-alt"></i> Download Excel</button>
+				</form>
 	</div>
   		<center>Click <b>Preview</b>  to preview data</center>
 	<div class="row box" style="margin-left:.25rem;">
@@ -109,7 +114,7 @@
                 </tr>
                 <center><div class="loader2" id="loading3" style="margin-top:2rem;"></div></center>	
                 </thead>
-                <tbody>
+                <tbody id="tbod">
                 <tr role="row" class="odd">
                 </tr>
                 </tbody>
@@ -168,7 +173,9 @@
 	}
 
 	$("#select_field").on('hide.bs.popover', function(){
+		fields = [];
 		$("input:checkbox[name=fieldset]:checked").each(function(){
+
     		fields.push($(this).val());
 		});
 		console.log(fields);
@@ -186,10 +193,15 @@
 	    		fields.push($(this).val());
 			});
 				console.log("visible");
+		}else{
+
 		}
 		$("#prev").attr("disabled", true);
 		$.get("php/getTableInfo.php",{request:'row', table:$_GET['type'], to:document.getElementById('to').value,from:document.getElementById('from').value,'fieldset':fields}, function(response){
 			console.log(response);
+			document.getElementById("tablehead").innerHTML = response.tablehead;
+			document.getElementById("tbod").innerHTML = response.table;
+			document.getElementById("query").value = response.dlquery;
 			$("#prev").removeAttr("disabled");
 		},'json').fail(function(response){
 			console.log(response);
@@ -197,6 +209,7 @@
 		});
 	 return false;
 	});
+
 
 
 </script>
