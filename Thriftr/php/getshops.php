@@ -77,12 +77,12 @@ require_once('../support/config.php');
 					<div class="row">
 						<span class="col-lg-12"><center>
 							<table class="table table-condensed">
-							<tr>
+							<tr class="odd">
 								<th>Low Traffic</th>
 								<th>Medium Traffic</th>
 								<th>High Traffic</th>
 							</tr>
-							<tr>
+							<tr class="odd">
 								<td><span class="badge bg-red">88% Chance</span></td>
 								<td><span class="badge bg-green">10% Chance</span></td>
 								<td><span class="badge bg-orange">55% Chance</span></td>

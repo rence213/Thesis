@@ -44,14 +44,16 @@
             <div class="box-body row" style="padding:2rem;padding-top:1rem;">
             	<span class="col-lg-6">
             	<center><b style="font-size:1.75rem;">Data Info</b><br></center><br>
-            	Dataset name: <br>
+            	Dataset name: <b><?php echo $_GET['type'];?> data</b><br>
             	Number of Records: <br>
+            	Oldest Record: <b><span id="oldest">Loading...</span></b> <br>
+            	Newest Record: <b><span id="recent">Loading...</span></b><br>
             	Source: <br>
             	</span>
             	<span class="col-lg-6">
             	<center><b style="font-size:1.75rem;">Technical</b><br></center><br>
-            	Table Name: <br>
-            	Number Of Columns: <br>
+            	Table Name: <b><span id="tablename">Loading...</span></b><br>
+            	Number Of Columns: <b><span id="columns">Loading...</span></b><br>
             	 <br>
             	</span>
             </div>
@@ -67,7 +69,7 @@
 		 <div class="form-group col-lg-3">
 		 	<label>From Date:</label>
 				<div class="input-group date " data-provide="datepicker">
-			    	<input type="text" class="form-control" placeholder="mm/dd/yyyy" required>
+			    	<input type="text" id="from" class="form-control" placeholder="mm/dd/yyyy" required>
 				    <div class="input-group-addon">
 				        <span class="glyphicon glyphicon-th"></span>
 				    </div>
@@ -77,7 +79,7 @@
 		<div class="form-group col-lg-3">
 		 	<label>To Date:</label>
 				<div class="input-group date " data-provide="datepicker">
-			    	<input type="text" class="form-control" placeholder="mm/dd/yyyy" required>
+			    	<input type="text" id="to" class="form-control" placeholder="mm/dd/yyyy" required>
 				    <div class="input-group-addon">
 				        <span class="glyphicon glyphicon-th"></span>
 				    </div>
@@ -85,7 +87,7 @@
 		</div>
 
 		<div class=" form-group col-lg-6">
-				<button type="submit"  class="btn btn-flat bg-green" onclick="preview()"><i class="glyphicon glyphicon-search"></i> Preview</button>
+				<button type="submit" id='prev' class="btn btn-flat bg-green"><i class="glyphicon glyphicon-search"></i> Preview</button>
 				<button type="button" class="btn btn-flat bg-green"><i class="glyphicon glyphicon-download-alt"></i> Download Excel</button>
 				<input type="checkbox"  id="enable" onclick="enable_cb(this);"> Select Fields</input>
 				<button type="button" class="btn btn-flat " id="select_field"  disabled><i class="glyphicon glyphicon-th"></i> Fields</button>
@@ -105,6 +107,7 @@
                 <tr role="row" id="tablehead">
 	                
                 </tr>
+                <center><div class="loader2" id="loading3" style="margin-top:2rem;"></div></center>	
                 </thead>
                 <tbody>
                 <tr role="row" class="odd">
@@ -132,69 +135,68 @@
 <script type="text/javascript">
 
 	var fields = [];
-
- $.get('php/getTableInfo.php',{request : "tablerows", table:$_GET['type']},function(data){
+	document.getElementById("loading3").style.display = "block";
+	
+   $.get('php/getTableInfo.php',{request : "tablerows", table:$_GET['type']},function(data){
 	var options = { 
        trigger: 'click',
        html: 'true',
        title:  "<b>Select Fields to include</b>",
        content: ""+data.html
-
    };
+   console.log(data);
+   document.getElementById("loading3").style.display = "none";
     $('#select_field').popover(options);
 	document.getElementById("tablehead").innerHTML = data.tablehead;
+	document.getElementById("tablename").innerHTML = data.tablename;
+	document.getElementById("oldest").innerHTML = data.oldest['month']+"/"+ data.oldest['day']+"/"+data.oldest['year'];
+	document.getElementById("recent").innerHTML = data.recent['month']+"/"+ data.recent['day']+"/"+data.recent['year'];
+	document.getElementById("columns").innerHTML = data.columns;
 	},'json').fail(function(data){
+		document.getElementById("loading3").style.display = "none";
     	console.log(data);
   });
-
 
 	function enable_cb(cb) {
 	  if (cb.checked) {
 	    $("#select_field").removeAttr("disabled");
-	    	$("#select_field").addClass("bg-blue");
+	    $("#select_field").addClass("bg-blue");
 	  } else {
 	    $("#select_field").attr("disabled", true);
 	    $("#select_field").removeClass("bg-blue");
 	  }
 	}
 
-
-
-	 $("#select_field").on('hide.bs.popover', function(){
-
+	$("#select_field").on('hide.bs.popover', function(){
 		$("input:checkbox[name=fieldset]:checked").each(function(){
     		fields.push($(this).val());
 		});
 		console.log(fields);
     });
 
-
-	 $("#select_field").on('show.bs.popover', function(){
+	$("#select_field").on('show.bs.popover', function(){
 		fields = [];
 		console.log(fields);
     });
-	function preview(){
-		$("input:checkbox[name=fieldset]:checked").each(function(){
-    		fields.push($(this).val());
-		});
-
-
-		$.get("php/getTableInfo.php",{request:'row', table:$_GET['type']}, function(response){
-
-		},'json').fail(function(response){
-			console.log(response)
-		});
-
-
-
-	}
 
 	$('#subform').submit(function () {
+		if ($("#select_field").next('div.popover:visible').length){
+			fields = [];
+	  		$("input:checkbox[name=fieldset]:checked").each(function(){
+	    		fields.push($(this).val());
+			});
+				console.log("visible");
+		}
+		$("#prev").attr("disabled", true);
+		$.get("php/getTableInfo.php",{request:'row', table:$_GET['type'], to:document.getElementById('to').value,from:document.getElementById('from').value,'fieldset':fields}, function(response){
+			console.log(response);
+			$("#prev").removeAttr("disabled");
+		},'json').fail(function(response){
+			console.log(response);
+			$("#prev").removeAttr("disabled");
+		});
 	 return false;
 	});
-
-   
-
 
 
 </script>
