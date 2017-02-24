@@ -16,10 +16,11 @@
 <script type="text/javascript" src="plugins/waves/dist/waves.min.js"></script>
 <script type="text/javascript" src="plugins/datepicker/bootstrap-datepicker.js"></script>
  <script src="plugins/iCheck/icheck.js"></script>
+<script src="plugins/chartjs/chart.js"></script>
 <script type="text/javascript">
 
 
-
+$('.datepicker').datepicker({ dateFormat: 'yy-mm-dd' });
 
 
 $('#click_advance').click(function() {
@@ -32,7 +33,7 @@ Waves.attach('.wave-button', ['flat-buttons', 'waves-effect', 'waves-light']); /
     Waves.init();
 
 
-$('.datepicker').datepicker();
+
 
 var $_GET = {};
 	if(document.location.toString().indexOf('?') !== -1) {

@@ -14,6 +14,7 @@ require_once('../support/config.php');
 		}
 		echo json_encode($array);
 	}
+
 	if($_REQUEST['request']=="shopinfo"){
 		include('simple_html_dom.php');
 		$html = file_get_html('http://mmdatraffic.interaksyon.com/line-view-edsa.php/');
@@ -94,7 +95,7 @@ require_once('../support/config.php');
 
 					<div class="row">
 						 <span class="col-md-8"></span>
-						 <span class="col-md-4"><button class="btn btn-flat	"><i class="fa fa-bar-chart" style="font-size:22px;"></i> View Full Statistics</button></span>
+						 <span class="col-md-4"><a  href="statistics.php?location='.$market_info['location_name'].'"><button role="button" class="btn btn-flat	"><i class="fa fa-bar-chart" style="font-size:22px;"></i> View Full Statistics</button></a></span>
 						 
 					</div>
 				</div>';

@@ -11,21 +11,21 @@
 <div class="container-fluid">
 
 		<div class="row" style=" margin-left:1rem; margin-top: 5rem;"><h2><b>Graph</b></h2></div>
-		
-		<span class="row" style="margin-top: 5rem;">
-		
+		<div class="row" style="margin-top: 5rem;">
 			<span class="col-lg-3">
 				<select class="form-control select2 select2-hidden-accessible" aria-hidden="true">
-					<option selected="selected" disabled>-Location-</option>
+					<option disabled>-Location-</option>
 					<?php
 						while($row = $query->fetch(PDO::FETCH_ASSOC)){
-							echo "<option>".$row['location_name']."</option>";
+									$selected ="";
+							if($row['location_name']==$_GET['location']){
+									$selected = 'selected';
+							}
+							echo "<option".$selected.">".$row['location_name']."</option>";
 						}
 					?>
-					
 				</select>
 			</span>
-			
 			<span class="col-lg-2">
 				<div class="input-group date " data-provide="datepicker">
 					<div class="input-group-addon">
@@ -42,9 +42,6 @@
 			    	<input type="text" class="form-control" placeholder="To: mm/dd/yyyy"  id="todate" required>
 				</div>
 			</span>
-
-			
-			
 			<span class="col-lg-3">
 				<div class="input-group">
 				<select class="form-control select2 select2-hidden-accessible" aria-hidden="true">
@@ -68,9 +65,6 @@
 				</select>
 				</div>
 			</span>
-			
-			
-			
 				<span class="col-lg-2">
 				<select class="form-control select2 select2-hidden-accessible" aria-hidden="true">
 					<option selected="selected" disabled>-Factors-</option>
@@ -79,10 +73,13 @@
 					<option>Road Accidents</option>
 				</select>
 			</span>
+		</div><br>
+		<div class="row" style="margin-top:5rem;">
+			<span class="col-lg-2"></span>
+			<span class="col-lg-8" style="background-color:grey; height:50rem;"></span>
+			<span class="col-lg-2"></span>
+		</div>
 			
-
-			
-		</span>
 		
 		
 
