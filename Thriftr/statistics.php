@@ -131,93 +131,72 @@
 				document.getElementById('hourly_option').style.display = 'block';
 			}
 		}
-		var ctx = document.getElementById("myChart").getContext("2d");
+		
 
 
-var data = {
-    labels: ["Chocolate", "Vanilla", "Strawberry"],
-    datasets: [
-        {
-            label: "LOW",
-            backgroundColor: "blue",
-            data: [3,7,4]
-        },
-        {
-            label: "MEDIUM",
-            backgroundColor: "red",
-            data: [4,3,5]
-        },
-        {
-            label: "HIGH",
-            backgroundColor: "green",
-            data: [7,2,6]
-        }
-    ]
-};
-
-var myBarChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
-        barValueSpacing: 0,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    min: 0,
-                }
-            }]
-        }
-    }
-});
-
- $("#visualize").click(function(){
-      
-   //    var e = document.getElementById("location");
-	  // var location = e.options[e.selectedIndex].text;
-   //    $.get('php/getGraph.php',{request:'trafficCount', 'interval' : interval, 'location':location},function(response){
-
-   //    }
-   //    	,'json').fail(function(response){
-   //    		console.log(response);
-   //    })
-  });
 
  $('#subform').submit(function () {
 		switch($('input[name="intervaldateOptions"]:checked').val()){
       	case '0': var interval = 'daily';  break;
       	case '1': var interval = 'hourly';  break;
       }
-        var e = document.getElementById("location");
+
+      var ctx = document.getElementById("myChart").getContext("2d");
+       var e = document.getElementById("location");
 	   var location = e.options[e.selectedIndex].text;
 	   var todate = document.getElementById("todate").value;
 	   var fromdate = document.getElementById("fromdate").value;
 	   var onedaydate = document.getElementById("onedaydate").value;
-	  	
 	  	var dates = {'fromdate': fromdate, 'todate': todate, 'onedaydate':onedaydate};
      $.get('php/getGraph.php',{request:'trafficCount', 'interval' : interval, 'location':location, 'dates':dates},function(response){
       		console.log(response);
 
       		var data = [];
-      		var data = {
-    labels: ["Chocolate", "Vanilla", "Strawberry"],
+      		var low = [];
+      		var medium = [];
+      		var high = [];
+      		$.each(response['hours'], function(i, item) {
+			  low.push(item['L']);
+			  medium.push(item['M']);
+			  high.push(item['H']);
+			})
+
+
+      		data = {
+    labels: Object.keys(response['hours']),
     datasets: [
         {
             label: "LOW",
             backgroundColor: "blue",
-            data: [3,7,4]
+            data: low
         },
         {
             label: "MEDIUM",
-            backgroundColor: "red",
-            data: [4,3,5]
+            backgroundColor: "yellow",
+            data: medium
         },
         {
             label: "HIGH",
-            backgroundColor: "green",
-            data: [7,2,6]
-        }
+            backgroundColor: "red",
+            data: high
+        }																																						
     ]
-};
+	};
+		var myBarChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: data,
+		    options: {
+		        barValueSpacing: 0,
+		        scales: {
+		            yAxes: [{
+		                ticks: {
+		                    min: 0,
+		                }
+		            }]
+		        }
+		    }
+		});
+
 
       }
 
