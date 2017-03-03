@@ -19,6 +19,9 @@ div.fadeMe {
   position:   fixed; 
 }
 
+hr.style4 {
+  border-top: 1px dotted #8c8b8b;
+}
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
