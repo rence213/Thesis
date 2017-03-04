@@ -103,7 +103,7 @@
 
 		<div class="row" id="graph-container" style="margin-top:2rem;">
 			<span class="col-lg-1"></span>
-			<span class="col-lg-10" id="chart" style="height:50rem;">
+			<span class="col-lg-10" id="chart" style="height:51rem; background-color:white;">
 			<canvas id="myChart"></canvas>
 				
 			</span>
@@ -145,8 +145,8 @@
 	 <div class="col-lg-6"><b><center>South Bound</center></b></div>
 	 </div>
 	  <div class="row">
-	 <div class="col-lg-6" id="chart2" style="height:40rem;"><canvas id="myChart2"></canvas></div>
-	 <div class="col-lg-6" id="chart3" style="height:40rem;"><canvas id="myChart3"></canvas></div>
+	 <div class="col-lg-6" id="chart2" style="height:32rem; background-color:white;"><canvas id="myChart2"></canvas></div>
+	 <div class="col-lg-6" id="chart3" style="height:32rem; background-color:white;"><canvas id="myChart3"></canvas></div>
 	 </div>
 
  	<div class="row" style="margin-left:5rem;">
@@ -199,8 +199,14 @@
 	 <div class="col-lg-6"><b><center>South Bound</center></b></div>
 	 </div>
 	   <div class="row">
-	 <div class="col-lg-6" id="chart4" style="height:40rem;"><canvas id="myChart4"></canvas></div>
-	 <div class="col-lg-6" id="chart5" style="height:40rem;"><canvas id="myChart5"></canvas></div>
+	 <div class="col-lg-6" id="chart4" style="height:32rem; background-color:white;"><canvas id="myChart4"></canvas></div>
+	 <div class="col-lg-6" id="chart5" style="height:32rem; background-color:white;"><canvas id="myChart5"></canvas></div>
+	 </div>
+
+	  </div>
+	 <div class="row" style="margin-left:5rem;">
+	 <div class="col-lg-6" id="text3"></div>
+	 <div class="col-lg-6" id="text4"></div>
 	 </div>
 
 </div>
@@ -237,7 +243,37 @@ $('#subform3').submit(function () {
 			  medium.push(item['M']);
 			  high.push(item['H']);
 			});
+var sum = 0;
+      		var temparray = [];
+			for( var i = 0; i < high.length; i++ ){
+				if(high[i]!=0){
+				temparray.push(high[i]);
+			    sum += parseInt( high[i], 10 );
+			    } //don't forget to add the base
+			}
+			var avg = sum/temparray.length;
+			var text1 = "Average Occurences Of High Traffic on this day: <b>"+Math.round(avg)+"</b> <br>"		
+			var temp = [];
+			$.each(response['N'], function(i, item) {
+			  if(item['H']>=avg){
+			  	temp.push(i);
+			  }
+			});
 
+			if(temp.length>0){
+				text1 += "Peak Hours: ";
+				for( var i = 0; i < temp.length; i++ ){
+					if(temp[i]>=10){
+ 						var time = temp[i]+"00000";
+				    	time = time.slice(0,4);
+				    	time = makeTime(time);
+					}else{
+						var time = temp[i]+":00am";
+					}
+			    	text1 += "<b>"+time+" </b>";
+				}
+			}
+			document.getElementById("text3").innerHTML = text1;
       		
 
 			data = {
@@ -246,17 +282,17 @@ $('#subform3').submit(function () {
     datasets: [
         {
             label: "LOW",
-            backgroundColor: "blue",
+            backgroundColor: "#FF992B",
             data: low
         },
         {
             label: "MEDIUM",
-            backgroundColor: "yellow",
+            backgroundColor: "#1477C3",
             data: medium
         },
         {
             label: "HIGH",
-            backgroundColor: "red",
+            backgroundColor: "#8712C7",
             data: high
         }																																						
     ]
@@ -286,7 +322,38 @@ $('#subform3').submit(function () {
 			  high.push(item['H']);
 			});
 
-      		
+      			var sum = 0;
+      		var temparray = [];
+			for( var i = 0; i < high.length; i++ ){
+				if(high[i]!=0){
+				temparray.push(high[i]);
+			    sum += parseInt( high[i], 10 );
+			    } //don't forget to add the base
+			}
+			var avg = sum/temparray.length;
+			var text1 = "Average Occurences Of High Traffic on this day: <b>"+Math.round(avg)+"</b> <br>"		
+			var temp = [];
+			$.each(response['S'], function(i, item) {
+			  if(item['H']>=avg){
+			  	temp.push(i);
+			  }
+			});
+
+			if(temp.length>0){
+				text1 += "Peak Hours: ";
+				for( var i = 0; i < temp.length; i++ ){
+				    if(temp[i]>=10){
+ 						var time = temp[i]+"00000";
+				    	time = time.slice(0,4);
+				    	time = makeTime(time);
+					}else{
+						var time = temp[i]+":00am";
+					}
+			    	text1 += "<b>"+time+" </b>";
+
+				}
+			}
+			document.getElementById("text4").innerHTML = text1;
 
 			data = {
 			
@@ -294,17 +361,17 @@ $('#subform3').submit(function () {
     datasets: [
         {
             label: "LOW",
-            backgroundColor: "blue",
+            backgroundColor: "#FF992B",
             data: low
         },
         {
             label: "MEDIUM",
-            backgroundColor: "yellow",
+            backgroundColor: "#1477C3",
             data: medium
         },
         {
             label: "HIGH",
-            backgroundColor: "red",
+            backgroundColor: "#8712C7",
             data: high
         }																																						
     ]
@@ -333,6 +400,17 @@ $('#subform3').submit(function () {
       })
 	 return false;
 	});
+
+ function makeTime(fourDigitTime) {
+    /* make sure add radix*/
+    var hours24 = parseInt(fourDigitTime.substring(0, 2),10);
+    var hours = ((hours24 + 11) % 12) + 1;
+    var amPm = hours24 > 11 ? 'pm' : 'am';
+    var minutes = fourDigitTime.substring(2);
+
+    return hours + ':' + minutes + amPm;
+};
+
 
 function resetCanvas3() {
   $('#myChart4').remove(); // this is my <canvas> element

@@ -24,4 +24,4 @@
   
   </head>
   
-<body class="skin-blue-light fixed sidebar-collapse">
+<body class="skin-blue-light fixed sidebar-collapse" style="background-color:#ebebeb;">

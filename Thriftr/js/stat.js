@@ -24,22 +24,22 @@
       	data = {
 	    labels: [1,2],
 	    datasets: [
-	        {
-	            label: "LOW",
-	            backgroundColor: "blue",
-	            data: [0]
-	        },
-	        {
-	            label: "MEDIUM",
-	            backgroundColor: "yellow",
-	            data: [0]
-	        },
-	        {
-	            label: "HIGH",
-	            backgroundColor: "red",
-	            data: [0]
-	        }																																						
-	    ]
+        {
+            label: "LOW",
+            backgroundColor: "#FF992B",
+            data: [0,0]
+        },
+        {
+            label: "MEDIUM",
+            backgroundColor: "#1477C3",
+            data: [0,0]
+        },
+        {
+            label: "HIGH",
+            backgroundColor: "#8712C7",
+            data: [0,0]
+        }																																						
+    ]
 	};
 		var myBarChart = new Chart(ctx, {
 		    type: 'bar',
@@ -152,17 +152,17 @@ var myBarChart5 = new Chart(ct5, {
     datasets: [
         {
             label: "LOW",
-            backgroundColor: "blue",
+            backgroundColor: "#FF992B",
             data: low
         },
         {
             label: "MEDIUM",
-            backgroundColor: "yellow",
+            backgroundColor: "#1477C3",
             data: medium
         },
         {
             label: "HIGH",
-            backgroundColor: "red",
+            backgroundColor: "#8712C7",
             data: high
         }																																						
     ]
@@ -237,20 +237,20 @@ var myBarChart5 = new Chart(ct5, {
 			data = {
 			
     labels: Object.keys(response['N']['days']),
-    datasets: [
+     datasets: [
         {
             label: "LOW",
-            backgroundColor: "blue",
+            backgroundColor: "#FF992B",
             data: low
         },
         {
             label: "MEDIUM",
-            backgroundColor: "yellow",
+            backgroundColor: "#1477C3",
             data: medium
         },
         {
             label: "HIGH",
-            backgroundColor: "red",
+            backgroundColor: "#8712C7",
             data: high
         }																																						
     ]
@@ -301,20 +301,20 @@ var myBarChart5 = new Chart(ct5, {
 			
       		data = {
     labels: Object.keys(response['S']['days']),
-    datasets: [
+     datasets: [
         {
             label: "LOW",
-            backgroundColor: "blue",
+            backgroundColor: "#FF992B",
             data: low
         },
         {
             label: "MEDIUM",
-            backgroundColor: "yellow",
+            backgroundColor: "#1477C3",
             data: medium
         },
         {
             label: "HIGH",
-            backgroundColor: "red",
+            backgroundColor: "#8712C7",
             data: high
         }																																						
     ]
