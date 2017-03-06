@@ -360,7 +360,7 @@ function setShops(){
 				lng:parseFloat(item[2])
 			};
 			
-			console.log(markerpos);
+			console.log(data);
 			marker = new google.maps.Marker({
 				map: map,
 				draggable: false,

@@ -3,7 +3,7 @@
 	addComponent('head');
 	addComponent('navbar3');
 	
-	$query = $connection -> myQuery("SELECT location_name from location_dimension");
+	$query = $connection -> myQuery("SELECT area_id,location_name from location_dimension");
 
 	if(isset($_GET['location'])){
 		$location = $_GET['location'];
@@ -18,7 +18,6 @@
 		$mean = $_GET['mean'];
 		$heat_index = 
 		round((((-42.379 + 2.04901523*(($mean*(9/5))+32) + 10.14333127*$Humidity - 0.22475541*(($mean*(9/5))+32)*$Humidity - 0.00683783*(($mean*(9/5))+32)*(($mean*(9/5))+32) - 0.05481717*$Humidity*$Humidity + 0.00122874*(($mean*(9/5))+32)*(($mean*(9/5))+32)*$Humidity + 0.00085282*(($mean*(9/5))+32)*$Humidity*$Humidity - 0.00000199*(($mean*(9/5))+32)*(($mean*(9/5))+32)*$Humidity*$Humidity)-32)/1.8));
-		$
 
 		$uturn = $_GET['uturn'];
 		$ped = $_GET['ped'];
@@ -33,16 +32,19 @@
 		$lightning = $_GET['lg'];
 		$hail = $_GET['hl'];
 		$haze = $_GET['hz'];
+
 		$sale = $_GET['sale'];
 		$accident = $_GET['accident'];
 
-		$command = 'D:\Utilities\R-3.3.2\bin\Rscript.exe testing.r 0 0 0 0 0';
- 		$num = exec($command);
- 		echo($num);
+		if($sale==1 || $accident ==1){
+			$is_event = 1;
+		}
 
- 		$values = substr($num, 5);
+		$command =  'D:\Utilities\R-3.3.2\bin\Rscript.exe testing.r '.$month.' '.' '.$week.' '.$time.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$Humidity .' '.$heat_index .' '.$speed.' '. $ranfall.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' '.$direction;
+ 		$num = exec($command);	
 
- 		echo $values;
+ 		echo "<br><br>".$command;
+ 		$values = substr($num, 2);
  		$status = explode(" ", $values);
 
 
@@ -53,20 +55,20 @@
 
 <div class="container-fluid" >
 
-
+<form method="get" action="predict.php">
 
 
 <div class="row" style=" margin-left:1rem; margin-top: 5rem;"><h2><b>Make a Prediction</b></h2></div><br>
+ <button  type="submit" class="btn btn-flat bg-green " data-role="none">Predict</button>
 <hr class="style-one">
 <div class="row"> 
 
-	<span class="col-lg-1"></span>
 	
 	 <?php
 		if(isset($_GET['location'])){
 	?>
      
-	<span class="col-lg-5">
+	<span class="col-lg-4">
 	<div class="info-box">
             <span class="info-box-icon bg-aqua">
             <i class="ion" style="margin-top:2rem;">Low</i>
@@ -74,18 +76,30 @@
 
             <div class="info-box-content">
               <span class="info-box-text"><br>Probability Of Low traffic</span>
-              <span class="info-box-number"><?php echo round($status[1]*100,2);?><small>%</small></span>
+              <span class="info-box-number"><?php echo round($status[1]*100,4);?><small>%</small></span>
             </div>
             <!-- /.info-box-content -->
           </div>
      </span>
-     <span class="col-lg-5">
+      <span class="col-lg-4">
+	<div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="ion" style="margin-top:2rem;">Med</i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text"><br>Probability Of Medium traffic</span>
+              <span class="info-box-number"><?php echo round($status[2]*100,4);?>%</span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+     </span>
+
+     <span class="col-lg-4">
 	<div class="info-box">
             <span class="info-box-icon bg-red"><i class="ion" style="margin-top:2rem;">High</i></span>
 
             <div class="info-box-content">
               <span class="info-box-text"><br>Probability Of High traffic</span>
-              <span class="info-box-number"><?php echo round($status[0]*100,2);?>%</span>
+              <span class="info-box-number"><?php echo round($status[0]*100,4);?>%</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -96,10 +110,10 @@
      	}
      ?>
 
-     <span class="col-lg-1"></span>
+    
 </div>
 <hr class="style-one">
-<form method="get" action="predict.php">
+
 <div class="row" style=" margin-left:3.5rem; margin-top: 5rem;">
 	<div class="col-lg-3">
 			<select required class="form-control select2 select2-hidden-accessible" id='location' name="location" aria-hidden="true" data-role="none">
@@ -110,7 +124,7 @@
 							if($row['location_name']==$_GET['location']){
 									$selected = 'selected';
 							}
-							echo "<option ".$selected."value='".$row['area_id']."'>".$row['location_name']."</option>";
+							echo "<option ".$selected." value='".$row['area_id']."'>".$row['location_name']."</option>";
 						}
 					?>
 			</select>
@@ -313,7 +327,7 @@
           </div>
 	</span>
 	
-	 <button  type="submit" class="btn btn-flat bg-green " data-role="none">Predict</button>
+	
 
 </div>
 <

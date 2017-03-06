@@ -23,6 +23,8 @@ require_once('../support/config.php');
 		$market_info = $connection -> myQuery("SELECT * FROM location_dimension where $market_id = location_id" )->fetch(PDO::FETCH_ASSOC);
 		$NorthBound = $html->find('div[id=1_'.$market_info['area_id'].'_0_status]',-1);
 		$SouthBound = $html->find('div[id=1_'.$market_info['area_id'].'_1_status]',-1);
+		$updatetime = $html->find('p[id=1_'.$market_info['area_id'].'_1_datetime]',-1);
+		$updatetime = $updatetime ->plaintext;
 		$NorthBound = $NorthBound->plaintext;
 		$SouthBound = $SouthBound->plaintext;
 		$NorthBound = preg_replace('/\s+/', '', $NorthBound);
@@ -63,7 +65,7 @@ require_once('../support/config.php');
 				<div class="container-fluid modal-body">
 					<div class="row" >
 						 <span class="col-md-6"><h4><b>Current Status:</b></h4></span>
-						 <span class="col-md-6">Updated As of (26:30)</span>
+						 <span class="col-md-6">'.$updatetime.'</span>
 					</div><br>
 					<div class="row">
 					<div class="col-md-4 col-lg-4 col-xs-4"><b>North Bound</b><br><span class="badge '.$Ncss.'">'.$NorthBound.'</span></div>
