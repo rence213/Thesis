@@ -6,9 +6,73 @@
 	
 ?>
 
-<div class="container-fluid">
+<div class="container-fluid parallax2">
 
-	<div class="row" style=" margin-left:1rem; margin-top: 5rem;"><h2><b>Statistics</b></h2></div>
+	<div class="row" style="height:50rem; margin-top:6rem;">
+
+		<div class="col-lg-6"  style="height:40rem;overflow:auto;overflow-y: scroll;">
+			<div class="box box-info">
+            <div class="box-header">
+              <h3 class="box-title">Road Structure</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-bordered table-striped dataTable">
+                <tbody id="tbod">
+                <tr id="tablehead">
+                  <th>Road Name</th>
+                  <th>Has Bus Stop</th>
+                  <th>Has Pedestrian Lane</th>
+                  <th>Has U Turn</th>
+                  <th>Intersection</th>
+                  <th>Mrt Stop</th>
+                </tr>
+                <?php
+                	$query2 = $connection -> myQuery("SELECT * FROM roadstructures;");
+                	while ($row2 = $query2 -> fetch(PDO::FETCH_ASSOC)){
+
+
+                ?>
+               	<tr role="row" class="odd">
+                  <td><?php echo $row2['road_location'];?></td>
+                  <td><?php echo $row2['bus_stop'];?></td>
+                  <td><?php echo $row2['pedestrian_lane'];?></td>
+                  <td><?php echo $row2['uturn_slot'];?></td>
+                  <td><?php echo $row2['intersection'];?></td>
+                  <td><?php echo $row2['mrt_stop'];?></td>
+                </tr>
+                <?php
+                }?>
+             	 </tbody>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+		</div>
+		<div class="col-lg-3">
+		</div>
+		<div class="col-lg-3">
+			<div class="info-box">
+	            <span class="info-box-icon bg-red"><i class="fa fa-automobile" style="margin-top:2rem;"></i></span>
+
+	            <div class="info-box-content">
+	              <span class="info-box-text">Accidents in EDSA</span>
+	              <span class="info-box-number"><?php 
+	              	$query3 = $connection -> myQuery("SELECT COUNT(*) as count FROM trafficwarehouse_updated.stg_road_acc;");
+	              	$row = $query3 -> fetch(PDO::FETCH_ASSOC);
+	              echo $row['count'];
+	              ?></span>Recorded accidents
+	            </div>
+	            <!-- /.info-box-content -->
+	          </div>
+
+	          
+
+		</div>
+	</div>
+
+	<div class="row" style=" margin-left:1rem;"><h2><b>Historic Statistics</b></h2><a href="http://thehackerdudes.com/T4-thesis/t4/statistics.php"><button role="button" class="btn btn-flat bg-green">Go To Realtime</button></a></div>
+
 	<hr class="style4">
 	
 	 <div class="row">
@@ -32,8 +96,6 @@
 		</div>
 		
 		<div class="col-lg-1">
-			
-				
 					<label>
 						<input type="radio" onclick="intervalCheck()" name="intervaldateOptions" value="0" id="intervalOption_Daily"  checked></input>
 						 Daily
@@ -89,6 +151,7 @@
 	</div>
 
 
+
 	
 
 	<div class="row"  style="margin-top:2rem;">
@@ -110,7 +173,6 @@
 			<span class="col-lg-1"></span>
 		</div>
 
-	</div>
 
 <br><br>
 	<div class="row"><hr class="style4">

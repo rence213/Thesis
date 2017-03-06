@@ -46,11 +46,7 @@
 				<span class="col-md-6">
 				<br>
 				<br>
-				<br>
-					<button class="btn bg-navy btn-flat">Upload Data</button>
-					<p> You can also Upload and Update the Data Centers here</p>
-					
-				<br>
+				
 				</span>
 			</span>
 			<br>

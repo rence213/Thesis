@@ -194,7 +194,45 @@ if($_REQUEST['request']=='trafficCountHourlyBehavior'){
 }
 
 
-		
+if($_REQUEST['request']=='wholeEdsaTraffic'){
+
+	$query = $connection -> myQuery("SELECT location_name, level, sum(levelcount) as total FROM datamart.rep_levelcount_daily where level = 'H' group by location_name, level order by total asc;");
+
+	while($row = $query -> fetch(PDO::FETCH_ASSOC)){
+		$response['data'][$row['location_name']]['H'] = $row['total'];
+	}
+	echo json_encode($response);
+
+}
+
+
+if($_REQUEST['request']=='wholeEdsaTraffic2'){
+
+	$query = $connection -> myQuery("SELECT area_id , dt.location_name, level, sum(levelcount) as total FROM datamart.rep_levelcount_daily as dt
+INNER JOIN trafficwarehouse_updated.location_dimension as ld on dt.location_name = ld.location_name
+ group by location_name, level ;");
+
+	while($row = $query -> fetch(PDO::FETCH_ASSOC)){
+	
+		$response['data'][$row['location_name']][$row['level']] = $row['total'];
+		$response['data'][$row['location_name']]['area_id'] = $row['area_id'];
+	}
+	echo json_encode($response);
+
+}
+
+
+if($_REQUEST['request']=='top'){
+
+	$query = $connection -> myQuery("SELECT location_name, level, sum(levelcount) as total FROM datamart.rep_levelcount_daily where level = 'H' group by location_name, level order by total desc;");
+
+	while($row = $query -> fetch(PDO::FETCH_ASSOC)){
+	
+		$response[][$row['location_name']]['H'] = $row['total'];
+	}
+	echo json_encode($response);
+
+}
 	
 		
 	

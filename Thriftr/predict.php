@@ -8,6 +8,7 @@
 	if(isset($_GET['location'])){
 		$location = $_GET['location'];
 		$direction = $_GET['direction'];
+		$year = date("Y");
 		$month = $_GET['month'];
 		$week = $_GET['weekday'];
 		$time = $_GET['time'];
@@ -17,9 +18,36 @@
 		$mean = $_GET['mean'];
 		$heat_index = 
 		round((((-42.379 + 2.04901523*(($mean*(9/5))+32) + 10.14333127*$Humidity - 0.22475541*(($mean*(9/5))+32)*$Humidity - 0.00683783*(($mean*(9/5))+32)*(($mean*(9/5))+32) - 0.05481717*$Humidity*$Humidity + 0.00122874*(($mean*(9/5))+32)*(($mean*(9/5))+32)*$Humidity + 0.00085282*(($mean*(9/5))+32)*$Humidity*$Humidity - 0.00000199*(($mean*(9/5))+32)*(($mean*(9/5))+32)*$Humidity*$Humidity)-32)/1.8));
-		
-	};
+		$
 
+		$uturn = $_GET['uturn'];
+		$ped = $_GET['ped'];
+		$inter = $_GET['inter'];
+		$mrt = $_GET['mrt'];
+		$bus = $_GET['bus'];
+
+		$speed = $_GET['speed'];
+		$ranfall = $_GET['amount'];
+		$storm = $_GET['st'];
+		$rain = $_GET['rn'];
+		$lightning = $_GET['lg'];
+		$hail = $_GET['hl'];
+		$haze = $_GET['hz'];
+		$sale = $_GET['sale'];
+		$accident = $_GET['accident'];
+
+		$command = 'D:\Utilities\R-3.3.2\bin\Rscript.exe testing.r 0 0 0 0 0';
+ 		$num = exec($command);
+ 		echo($num);
+
+ 		$values = substr($num, 5);
+
+ 		echo $values;
+ 		$status = explode(" ", $values);
+
+
+
+		};
 ?>
 <link rel="stylesheet" href="plugins/bootstrap-slider/slider.css">
 
@@ -46,7 +74,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text"><br>Probability Of Low traffic</span>
-              <span class="info-box-number">75.55<small>%</small></span>
+              <span class="info-box-number"><?php echo round($status[1]*100,2);?><small>%</small></span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -57,7 +85,7 @@
 
             <div class="info-box-content">
               <span class="info-box-text"><br>Probability Of High traffic</span>
-              <span class="info-box-number">75.55%</span>
+              <span class="info-box-number"><?php echo round($status[0]*100,2);?>%</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -82,7 +110,7 @@
 							if($row['location_name']==$_GET['location']){
 									$selected = 'selected';
 							}
-							echo "<option ".$selected.">".$row['location_name']."</option>";
+							echo "<option ".$selected."value='".$row['area_id']."'>".$row['location_name']."</option>";
 						}
 					?>
 			</select>
@@ -96,6 +124,7 @@
 				
 			</select>
 		</div>
+
 
 		<div  class="col-lg-2">
 			<select required class="form-control select2 select2-hidden-accessible" id='month' name="month" aria-hidden="true"  required >

@@ -1,0 +1,2 @@
+year,month,day,weekday,hour,area_id,Maximum,Humidity,heat_index,Speed,Rainfall_amount,is_Thunderstorm,is_Lightining,is_bus_stop,is_pedestrian_lane,is_uturn_slot,is_intersection,is_mrt_stop,is_sale,is_accident,is_event,direction,level
+2016,5,4,1,8,29,30,88,20,2,0,0,0,0,1,1,1,1,1,1,1,N,
