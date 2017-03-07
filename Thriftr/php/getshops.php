@@ -68,35 +68,19 @@ require_once('../support/config.php');
 						 <span class="col-md-6">'.$updatetime.'</span>
 					</div><br>
 					<div class="row">
+					<div class="col-lg-1"></div>
 					<div class="col-md-4 col-lg-4 col-xs-4"><b>North Bound</b><br><span class="badge '.$Ncss.'">'.$NorthBound.'</span></div>
-					<div class="col-md-4 col-lg-4 col-xs-4"></div>
+					<div class="col-lg-2"></div>
 					<div class="col-md-4 col-lg-4 col-xs-4"><b>South Bound</b><br><span class="badge '.$Scss.'">'.$SouthBound.'</span></div>
+					<div class="col-lg-1"></div>
 					</div>
+					<br><br>
+					
+				
 
 					<div class="row">
-						<span class="col-md-12"><center><h4><b>Traffic Level Probability Table</b></h4></center></span>
-
-					</div>
-					<div class="row">
-						<span class="col-lg-12"><center>
-							<table class="table table-condensed">
-							<tr class="odd">
-								<th>Low Traffic</th>
-								<th>Medium Traffic</th>
-								<th>High Traffic</th>
-							</tr>
-							<tr class="odd">
-								<td><span class="badge bg-red">88% Chance</span></td>
-								<td><span class="badge bg-green">10% Chance</span></td>
-								<td><span class="badge bg-orange">55% Chance</span></td>
-							</tr>
-							
-						</table>
-						</center></span
-					</div>
-
-					<div class="row">
-						 <span class="col-md-8"></span>
+						 <span class="col-md-4"></span>
+						 <span class="col-lg-4"><a  href="predict.php"><button role="button" class="btn btn-flat	bg-orange"><i class="fa fa-bar-chart" style="font-size:22px;"></i>Make Prediction</button></a></span>
 						 <span class="col-md-4"><a  href="statistics.php?location='.$market_info['location_name'].'"><button role="button" class="btn btn-flat	"><i class="fa fa-bar-chart" style="font-size:22px;"></i> View Full Statistics</button></a></span>
 						 
 					</div>

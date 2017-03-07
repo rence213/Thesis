@@ -1,7 +1,7 @@
 <?php
 	require_once('support/support.php');
 	addComponent('head');
-	addComponent('navbar');
+	addComponent('navbar3');
 	$query = $connection -> myQuery("SELECT location_name from location_dimension");
 	
 ?>
