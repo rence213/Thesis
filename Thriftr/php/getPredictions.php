@@ -52,15 +52,18 @@
 		for($fromtime;$fromtime<=$totime;$fromtime++){
 			
 			$timearray[] = $fromtime;
-			$command =  'D:\Utilities\R-3.3.2\bin\Rscript.exe ..\testing.r '.$month.' '.$week.' '.$fromtime.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$humidity .' '.$heat_index .' '.$speed.' '. $rain.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' N';
+			//PC $command =  'D:\Utilities\R-3.3.2\bin\Rscript.exe ..\testing.r '.$month.' '.$week.' '.$fromtime.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$humidity .' '.$heat_index .' '.$speed.' '. $rain.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' N';
+			$command =  'C:\"Program Files"\R\R-3.3.2\bin\Rscript.exe ..\testing.r '.$month.' '.$week.' '.$fromtime.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$humidity .' '.$heat_index .' '.$speed.' '. $rain.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' N';
 			$num = exec($command);	
  	 		 $values = substr($num, 2);
  	 		 $status = explode(" ", $values);
  	 		$response['data']['N'][] = $status;
-			$command =  'D:\Utilities\R-3.3.2\bin\Rscript.exe ..\testing.r '.$month.' '.$week.' '.$fromtime.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$humidity .' '.$heat_index .' '.$speed.' '. $rain.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' S';
+			//PC $command =  'D:\Utilities\R-3.3.2\bin\Rscript.exe ..\testing.r '.$month.' '.$week.' '.$fromtime.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$humidity .' '.$heat_index .' '.$speed.' '. $rain.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' S';
+			$command =  'C:\"Program Files"\R\R-3.3.2\bin\Rscript.exe ..\testing.r '.$month.' '.$week.' '.$fromtime.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$humidity .' '.$heat_index .' '.$speed.' '. $rain.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' S';
+			$response['command'][] = $command;
 			$num = exec($command);	
- 	 		 $values = substr($num, 2);
- 	 		 $status = explode(" ", $values);
+ 	 		$values = substr($num, 2);
+ 	 		$status = explode(" ", $values);
  	 		$response['data']['S'][] = $status;
 		}
 		$response['label'] = $timearray;

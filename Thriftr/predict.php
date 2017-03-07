@@ -40,7 +40,7 @@
 			$is_event = 1;
 		}
 
-		$command =  'D:\Utilities\R-3.3.2\bin\Rscript.exe testing.r '.$month.' '.' '.$week.' '.$time.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$Humidity .' '.$heat_index .' '.$speed.' '. $ranfall.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' '.$direction;
+		$command =  'C:\"Program Files"\R\R-3.3.2\bin\Rscript.exe testing.r '.$month.' '.' '.$week.' '.$time.' '.$location .' '.$max.' '. $min.' '. $mean .' '.$Humidity .' '.$heat_index .' '.$speed.' '. $ranfall.' '. $storm.' '. $lightning .' '.$bus.' '. $ped .' '.$uturn .' '.$inter.' '. $mrt .' '.$is_event .' '.$direction;
  		$num = exec($command);	
 
  		echo "<br><br>".$command;

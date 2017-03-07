@@ -152,7 +152,7 @@ hr.style4 {
     background-image: url("../img/traffic.png");
 
     /* Full height */
-    height: 50%; 
+    height: 80%; 
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;

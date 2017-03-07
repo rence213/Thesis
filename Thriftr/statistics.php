@@ -9,8 +9,8 @@
 <div class="container-fluid parallax2">
 
 	<div class="row" style="height:50rem; margin-top:6rem;">
-
-		<div class="col-lg-6"  style="height:40rem;overflow:auto;overflow-y: scroll;">
+		
+		<div class="col-lg-8"  style="height:40rem;overflow:auto;overflow-y: scroll;">
 			<div class="box box-info">
             <div class="box-header">
               <h3 class="box-title">Road Structure</h3>
@@ -260,16 +260,16 @@
 	 <div class="col-lg-6"><b><center>North Bound</center></b></div>
 	 <div class="col-lg-6"><b><center>South Bound</center></b></div>
 	 </div>
-	   <div class="row">
+	   <div class="row" style="background-color:white;">
 	 <div class="col-lg-6" id="chart4" style="height:32rem; background-color:white;"><canvas id="myChart4"></canvas></div>
 	 <div class="col-lg-6" id="chart5" style="height:32rem; background-color:white;"><canvas id="myChart5"></canvas></div>
-	 </div>
-
-	  </div>
-	 <div class="row" style="margin-left:5rem;">
+	 <div class="col-lg-12"></div>
 	 <div class="col-lg-6" id="text3"></div>
 	 <div class="col-lg-6" id="text4"></div>
+
 	 </div>
+	  <br><br>
+	
 
 </div>
 
