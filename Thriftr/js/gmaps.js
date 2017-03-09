@@ -323,10 +323,10 @@ function CenterControl(controlDiv, map) {
         controlText.style.fontSize = '16px';
         controlText.style.padding = '20px';
      
-        var html = "<b> Updates </b>"+
-        "<br>TRAFFIC FACTORS<br><p class='textAlign:left;'>Traffic factors affecting the forecasts and their corresponding weights</p>"+
+        var html = "<b>Traffic Level Confidence</b>"+
+        "<br><br>"+
         "<br><ul>"+
-        "<li>Weather - 30%</li></ul><br> Confidence Factor: 87%"
+        "<br>Model Accuracy: <b>84.24%</><br>Kappa :<b>0.741</b>"
         controlText.innerHTML = html;
         controlUI.appendChild(controlText);
 
