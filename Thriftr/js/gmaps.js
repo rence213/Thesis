@@ -304,8 +304,8 @@ function CenterControl(controlDiv, map) {
 
         // Set CSS for the control border.
         var controlUI = document.createElement('div');
-        controlUI.style.backgroundColor = 'rgba(255,255,255,0.7)';
-        controlUI.style.border = '10% solid rgba(255,255,255,0.7)';
+        controlUI.style.backgroundColor = 'rgba(255,255,255,1)';
+        controlUI.style.border = '10% solid rgba(255,255,255,1)';
         controlUI.style.width="35rem"; 
         controlUI.style.borderRadius = '10px';
         controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.5)';
@@ -324,9 +324,8 @@ function CenterControl(controlDiv, map) {
         controlText.style.padding = '20px';
      
         var html = "<b>Traffic Level Confidence</b>"+
-        "<br><br>"+
-        "<br><ul>"+
-        "<br>Model Accuracy: <b>84.24%</><br>Kappa :<b>0.741</b>"
+        ""+
+        "<br>Model Accuracy: <b>84.24%</b></><br>Kappa :<b>0.741</b>"
         controlText.innerHTML = html;
         controlUI.appendChild(controlText);
 
